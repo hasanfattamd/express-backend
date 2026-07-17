@@ -17,6 +17,13 @@ class ApiError extends Error {
     static conflict(message = "Conflict - User alreadt exists.") {
         return new ApiError(409, message);
     }
+
+    static forbidden(message = "Forbidden") {
+        return new ApiError(412, message);
+    }
+    static notFound(message = "Forbidden") {
+        return new ApiError(412, message);
+    }
 }
 
 export default ApiError;
