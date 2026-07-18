@@ -80,7 +80,7 @@ const refresh = (token) => {
 };
 
 const logout = (userId) => {
-    await User.findByIdAndUpdate(userId, { refresToken: null })
+    await User.findByIdAndUpdate(userId, { refreshToken: null })
 }
 
 const forgotPassword = (email) => {
@@ -106,6 +106,12 @@ const resetPassword = async (token, newPassword) => {
     user.resetPasswordExpires = undefined;
     await user.save({ validateBeforeSave: false });
     return { message: "Password reset successful" };
+}
+
+const getMe = async (userId) => {
+    const user = await User.findById(userId)
+    if(!user) throw ApiError.notFound("user not found")
+    return user;
 }
 
 export { register, login, refresh, logout, forgotPassword, resetPassword };
